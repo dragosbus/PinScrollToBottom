@@ -1,2 +1,0 @@
-# PinScrollToBottom
-Created with CodeSandbox
