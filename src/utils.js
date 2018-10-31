@@ -1,4 +1,4 @@
-import { from, timer } from "rxjs";
+import { from, timer, fromEvent } from "rxjs";
 import { flatMap, concatAll } from "rxjs/operators";
 
 const fetchUser = async () => {
@@ -12,3 +12,7 @@ export const getUser$ = timer(0, 5000).pipe(
   flatMap(() => from(fetchUser())),
   concatAll()
 );
+
+export const clickEvent$ = (element, type) => {
+  return fromEvent(element, type);
+};

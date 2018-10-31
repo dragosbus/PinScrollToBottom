@@ -17,7 +17,7 @@ export default class PinScrollToBottom extends Component {
 
   getSnapshotBeforeUpdate() {
     const { clientHeight, scrollTop, scrollHeight } = window;
-    console.log(clientHeight, scrollTop, scrollHeight);
+
     return clientHeight + scrollTop < scrollHeight;
   }
 
