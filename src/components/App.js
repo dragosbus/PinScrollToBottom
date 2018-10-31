@@ -24,7 +24,7 @@ export default class App extends Component {
         <PinScrollToBottom>
           {this.state.users.map(user => {
             return (
-              <div>
+              <div className="user">
                 <img src={user.picture.medium} alt={user.email} />
                 <h2>
                   {user.name.first} {user.name.last}

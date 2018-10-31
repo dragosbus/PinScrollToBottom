@@ -1,0 +1,27 @@
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem auto;
+  animation: fade-in 0.4s ease-in;
+}
+
+.user img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 100%;
+  margin: 0;
+}
+
+.user h2 {
+  margin-left: 2rem;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
