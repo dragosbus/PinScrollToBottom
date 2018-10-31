@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PinScrollToBottom from "./Scroller";
-import { getUser$, clickEvent$ } from "../utils";
+import { getUser } from "../utils";
 
 export default class App extends Component {
   constructor(props) {
@@ -9,24 +9,23 @@ export default class App extends Component {
       users: []
     };
     this.stopBtn = React.createRef();
-    this.stopSubscription = this.stopSubscription.bind(this);
   }
 
   componentDidMount() {
-    this.subscription = getUser$.subscribe(user => {
+    getUser(this.stopBtn.current, "click").subscribe(user => {
       this.setState(prevState => ({
         users: prevState.users.concat(user)
       }));
     });
   }
 
-  stopSubscription() {
-    const node = this.stopBtn.current;
-    console.log(node);
-    clickEvent$(node, "click").subscribe(event => {
-      this.subscription.unsubscribe();
-    });
-  }
+  // stopSubscription() {
+  //   const node = this.stopBtn.current;
+  //   console.log(node);
+  //   clickEvent$(node, "click").subscribe(event => {
+  //     this.subscription.unsubscribe();
+  //   });
+  // }
 
   render() {
     return (
@@ -42,7 +41,7 @@ export default class App extends Component {
               </div>
             );
           })}
-          <button ref={this.stopBtn} onClick={this.stopSubscription}>
+          <button className="stop" ref={this.stopBtn}>
             Stop
           </button>
         </PinScrollToBottom>

@@ -1,5 +1,5 @@
 import { from, timer, fromEvent } from "rxjs";
-import { flatMap, concatAll } from "rxjs/operators";
+import { flatMap, concatAll, takeUntil } from "rxjs/operators";
 
 const fetchUser = async () => {
   const response = await fetch("https://randomuser.me/api/");
@@ -8,11 +8,14 @@ const fetchUser = async () => {
   return data.results;
 };
 
-export const getUser$ = timer(0, 5000).pipe(
-  flatMap(() => from(fetchUser())),
-  concatAll()
-);
-
 export const clickEvent$ = (element, type) => {
   return fromEvent(element, type);
+};
+
+export const getUser = (element, type) => {
+  return timer(0, 5000).pipe(
+    flatMap(() => from(fetchUser())),
+    concatAll(),
+    takeUntil(clickEvent$(element, type))
+  );
 };
